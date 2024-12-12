@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const KycAPI = axios.create({ baseURL: 'http://localhost:5500/v1/'});
+const KycAPI = axios.create({ baseURL: import.meta.env.VITE_REACT_APP_API_URL});
 
 const getAccessToken = async () => {
     const user = JSON.parse(localStorage.getItem('user')) || [];
