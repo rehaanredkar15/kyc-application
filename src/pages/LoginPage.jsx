@@ -1,25 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { login } from "../network/kyc-api";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      if (user.role === "admin") {
+        navigate("/dashboard");
+      } else {
+        navigate("/kyc");
+      }
+    }
+  }, [navigate]);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     setLoading(true);
-    setTimeout(() => {
-      console.log(values);
+    try {
+      const response = await login({
+        email: values.email,
+        password: values.password,
+      });
+
+      const { user, token } = response.data; 
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+
+      if (user.role === "admin") {
+        navigate("/dashboard");
+      } else {
+        navigate("/kyc");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Login failed. Please check your credentials.");
+    } finally {
       setLoading(false);
-      navigate("/dashboard");
-    }, 2000); 
+    }
   };
+
+
 
   return (
     <div className="flex h-screen">
@@ -77,9 +107,9 @@ const LoginPage = () => {
                   </div>
                   <span
                     className="text-sm text-blue-600 cursor-pointer hover:underline"
-                    onClick={() => navigate("/forgot-password")}
+                    onClick={() => navigate("/")}
                   >
-                    Forgot password
+                    Forgot password?
                   </span>
                 </div>
 
