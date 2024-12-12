@@ -17,22 +17,22 @@ Before you start, ensure you have the following installed on your local machine:
 
 ## Installation
 
-1. Clone the repository:
+## 1. Clone the repository:
 
    First, clone this repository to your local machine using the following command:
 
    https://github.com/rehaanredkar15/kyc-application.git
 
-2. Navigate to the folder
+## 2. Navigate to the folder
    cd repository
 
-3. Run following command to install dependencies
+## 3. Run following command to install dependencies
 
   npm install
 
-4. After Installing run the following command to start the application
+## 4. After Installing run the following command to start the application
   npm run start
 
 
-5. Make sure your backend is running and accessible at the provided VITE_REACT_APP_API_URL or change the url through the end adjusting the port number
+## 5. Make sure your backend is running and accessible at the provided VITE_REACT_APP_API_URL or change the url through the end adjusting the port number
 
