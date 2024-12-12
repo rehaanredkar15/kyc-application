@@ -6,7 +6,7 @@ import { getAllUsers, updateKyc } from "../network/kyc-api";
 const DashboardPage = () => {
   const [userName, setUserName] = useState("Admin"); 
   const [users, setUsers] = useState([]);
-  const [kpiData, setKpiData] = useState({ totalUsers: 0, approvedKYCs: 0, rejectedKYCs: 0 });
+  const [kpiData, setKpiData] = useState({ totalUsers: 0, approvedKYCs: 0, rejectedKYCs: 0,pendingKYCs: 0 });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +32,7 @@ const DashboardPage = () => {
           totalUsers: users.totalUsers,
           approvedKYCs: users.approvedKYCs,
           rejectedKYCs: users.rejectedKYCs,
+          pendingKYCs: users.pendingKYCs,
         });
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -91,6 +92,7 @@ const DashboardPage = () => {
         totalUsers: users.totalUsers,
         approvedKYCs: users.approvedKYCs,
         rejectedKYCs: users.rejectedKYCs,
+        pendingKYCs: users.pendingKYCs,
       });
     } catch (error) {
       console.error("Error refreshing users:", error);
@@ -119,7 +121,7 @@ const DashboardPage = () => {
       <div className="p-6">
         <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
 
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-4 gap-4 mb-6">
           <div className="bg-blue-100 p-4 rounded-md flex items-center space-x-4">
             <FaUser className="text-blue-500 text-3xl" />
             <div>
@@ -132,6 +134,13 @@ const DashboardPage = () => {
             <div>
               <h2 className="text-sm font-semibold">Approved KYCs</h2>
               <p className="text-lg font-bold">{kpiData.approvedKYCs}</p>
+            </div>
+          </div>
+          <div className="bg-yellow-100 p-4 rounded-md flex items-center space-x-4">
+            <FaCheckCircle className="text-yellow-500 text-3xl" />
+            <div>
+              <h2 className="text-sm font-semibold">Pending KYCs</h2>
+              <p className="text-lg font-bold">{kpiData.pendingKYCs}</p>
             </div>
           </div>
           <div className="bg-red-100 p-4 rounded-md flex items-center space-x-4">
