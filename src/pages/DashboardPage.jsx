@@ -4,9 +4,9 @@ import { FaUser, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { getAllUsers, updateKyc } from "../network/kyc-api";
 
 const DashboardPage = () => {
-  const [userName, setUserName] = useState("Admin"); 
+  const [userName, setUserName] = useState("Admin");
   const [users, setUsers] = useState([]);
-  const [kpiData, setKpiData] = useState({ totalUsers: 0, approvedKYCs: 0, rejectedKYCs: 0,pendingKYCs: 0 });
+  const [kpiData, setKpiData] = useState({ totalUsers: 0, approvedKYCs: 0, rejectedKYCs: 0, pendingKYCs: 0 });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,11 +55,7 @@ const DashboardPage = () => {
   };
   const handleApprove = async (userId, userName, userEmail) => {
     try {
-      await updateKyc(userId, { 
-        status: "accepted", 
-        name: userName, 
-        email: userEmail 
-      });
+      await updateKyc(userId, { status: "accepted", name: userName, email: userEmail });
       alert(`${userName}'s KYC Approved successfully.`);
       refreshUsers();
     } catch (error) {
@@ -67,14 +63,10 @@ const DashboardPage = () => {
       alert("Failed to approve KYC.");
     }
   };
-  
+
   const handleReject = async (userId, userName, userEmail) => {
     try {
-      await updateKyc(userId, { 
-        status: "rejected", 
-        name: userName, 
-        email: userEmail 
-      });
+      await updateKyc(userId, { status: "rejected", name: userName, email: userEmail });
       alert(`${userName}'s KYC Rejected successfully.`);
       refreshUsers();
     } catch (error) {
@@ -119,58 +111,57 @@ const DashboardPage = () => {
       </header>
 
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
-        <div className="grid grid-cols-4 gap-4 mb-6">
-          <div className="bg-blue-100 p-4 rounded-md flex items-center space-x-4">
-            <FaUser className="text-blue-500 text-3xl" />
+        <div className="grid grid-cols-4 gap-6 mb-6">
+          <div className="bg-blue-100 p-6 rounded-3xl flex items-center space-x-6 shadow-lg">
+            <FaUser className="text-blue-500 text-4xl" />
             <div>
-              <h2 className="text-sm font-semibold">Total Users</h2>
-              <p className="text-lg font-bold">{kpiData.totalUsers}</p>
+              <h2 className="text-lg font-semibold">Total Users</h2>
+              <p className="text-xl font-bold">{kpiData.totalUsers}</p>
             </div>
           </div>
-          <div className="bg-green-100 p-4 rounded-md flex items-center space-x-4">
-            <FaCheckCircle className="text-green-500 text-3xl" />
+          <div className="bg-green-100 p-6 rounded-3xl flex items-center space-x-6 shadow-lg">
+            <FaCheckCircle className="text-green-500 text-4xl" />
             <div>
-              <h2 className="text-sm font-semibold">Approved KYCs</h2>
-              <p className="text-lg font-bold">{kpiData.approvedKYCs}</p>
+              <h2 className="text-lg font-semibold">Approved KYCs</h2>
+              <p className="text-xl font-bold">{kpiData.approvedKYCs}</p>
             </div>
           </div>
-          <div className="bg-yellow-100 p-4 rounded-md flex items-center space-x-4">
-            <FaCheckCircle className="text-yellow-500 text-3xl" />
+          <div className="bg-yellow-100 p-6 rounded-3xl flex items-center space-x-6 shadow-lg">
+            <FaCheckCircle className="text-yellow-500 text-4xl" />
             <div>
-              <h2 className="text-sm font-semibold">Pending KYCs</h2>
-              <p className="text-lg font-bold">{kpiData.pendingKYCs}</p>
+              <h2 className="text-lg font-semibold">Pending KYCs</h2>
+              <p className="text-xl font-bold">{kpiData.pendingKYCs}</p>
             </div>
           </div>
-          <div className="bg-red-100 p-4 rounded-md flex items-center space-x-4">
-            <FaTimesCircle className="text-red-500 text-3xl" />
+          <div className="bg-red-100 p-6 rounded-3xl flex items-center space-x-6 shadow-lg">
+            <FaTimesCircle className="text-red-500 text-4xl" />
             <div>
-              <h2 className="text-sm font-semibold">Rejected KYCs</h2>
-              <p className="text-lg font-bold">{kpiData.rejectedKYCs}</p>
+              <h2 className="text-lg font-semibold">Rejected KYCs</h2>
+              <p className="text-xl font-bold">{kpiData.rejectedKYCs}</p>
             </div>
           </div>
         </div>
 
-       
-        <div className="bg-white shadow-md rounded-md p-6">
-          <h2 className="text-xl font-bold mb-4">User Details</h2>
+        <div className="bg-white shadow-lg rounded-3xl p-6">
+          <h2 className="text-2xl font-bold mb-6">User Details</h2>
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-200 text-left">
-                <th className="border p-3">Name</th>
-                <th className="border p-3">Email</th>
-                <th className="border p-3">Status</th>
-                <th className="border p-3">View Document</th>
-                <th className="border p-3">Actions</th>
+                <th className="border p-4 text-xl font-semibold rounded-lg">Name</th>
+                <th className="border p-4 text-xl font-semibold rounded-lg">Email</th>
+                <th className="border p-4 text-xl font-semibold rounded-lg">Status</th>
+                <th className="border p-4 text-xl font-semibold rounded-lg">View Document</th>
+                <th className="border p-4 text-xl font-semibold rounded-lg">Actions</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user._id} className="bg-white hover:bg-gray-100">
-                  <td className="border p-3">{user.name}</td>
-                  <td className="border p-3">{user.email}</td>
-                  <td className="border p-3">
+                  <td className="border p-4 text-lg font-medium rounded-lg">{user.name}</td>
+                  <td className="border p-4 text-lg font-medium rounded-lg">{user.email}</td>
+                  <td className="border p-4 text-lg font-medium rounded-lg">
                     {user.kycDetails.status === "accepted" ? (
                       <span className="text-green-600 font-semibold">Approved</span>
                     ) : user.kycDetails.status === "rejected" ? (
@@ -179,25 +170,25 @@ const DashboardPage = () => {
                       <span className="text-yellow-600 font-semibold">Pending</span>
                     )}
                   </td>
-                  <td className="border p-3">
+                  <td className="border p-4 text-lg font-medium rounded-lg">
                     <button
-                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
                       onClick={() => viewDocument(user.kycDetails.documentPath)}
                     >
                       View Document
                     </button>
                   </td>
-                  <td className="border p-3">
+                  <td className="border p-4 text-lg font-medium rounded-lg">
                     {user.kycDetails.status === "pending" ? (
-                      <div className="space-x-2">
+                      <div className="space-x-4">
                         <button
-                          className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                          className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
                           onClick={() => handleApprove(user._id, user.name, user.email)}
                         >
                           Approve
                         </button>
                         <button
-                          className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
                           onClick={() => handleReject(user._id, user.name, user.email)}
                         >
                           Reject
@@ -207,7 +198,6 @@ const DashboardPage = () => {
                       <span className="text-gray-500">{user.kycDetails.status}</span>
                     )}
                   </td>
-                
                 </tr>
               ))}
             </tbody>
