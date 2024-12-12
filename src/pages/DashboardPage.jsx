@@ -182,7 +182,7 @@ const DashboardPage = () => {
                   <td className="border p-3">
                     <button
                       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                      onClick={() => viewDocument(user.kycDetails.documentLink)}
+                      onClick={() => viewDocument(user.kycDetails.documentPath)}
                     >
                       View Document
                     </button>

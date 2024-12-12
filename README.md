@@ -36,3 +36,6 @@ Before you start, ensure you have the following installed on your local machine:
 
 ## 5. Make sure your backend is running and accessible at the provided VITE_REACT_APP_API_URL or change the url through the end adjusting the port number
 
+The Admin Credentials to Test the app are :
+Email: Admin@gmail.com
+Password:Admin123
