@@ -105,12 +105,6 @@ const LoginPage = () => {
                       Remember for 30 days
                     </label>
                   </div>
-                  <span
-                    className="text-sm text-blue-600 cursor-pointer hover:underline"
-                    onClick={() => navigate("/")}
-                  >
-                    Forgot password?
-                  </span>
                 </div>
 
                 <button
